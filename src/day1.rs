@@ -1,7 +1,7 @@
 use crate::common::read_lines;
 
 pub fn puzzle1() -> String {
-    let inputs = read_lines("./src/inputs/day1").unwrap().map(|l| l.unwrap().parse::<u64>().unwrap()).collect::<Vec<u64>>();
+    let inputs = read_lines("./inputs/day1").unwrap().map(|l| l.unwrap().parse::<u64>().unwrap()).collect::<Vec<u64>>();
     for x in inputs.clone() {
         for y in inputs.clone() {
             if x + y == 2020 {
@@ -13,7 +13,7 @@ pub fn puzzle1() -> String {
 }
 
 pub fn puzzle2() -> String {
-    let inputs = read_lines("./src/inputs/day1").unwrap().map(|l| l.unwrap().parse::<u64>().unwrap()).collect::<Vec<u64>>();
+    let inputs = read_lines("./inputs/day1").unwrap().map(|l| l.unwrap().parse::<u64>().unwrap()).collect::<Vec<u64>>();
     for x in inputs.clone() {
         for y in inputs.clone() {
             if x + y >= 2020 {

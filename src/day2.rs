@@ -21,7 +21,7 @@ fn test_parsed_line1(parsed: Vec<String>) -> bool {
 }
 
 pub fn puzzle1() -> String {
-    let cnt = read_lines("./src/inputs/day2").unwrap().map(|l| {parse_line(l.unwrap().as_str())}).filter(|p| test_parsed_line1(p.to_vec())).count();
+    let cnt = read_lines("./inputs/day2").unwrap().map(|l| {parse_line(l.unwrap().as_str())}).filter(|p| test_parsed_line1(p.to_vec())).count();
     format!("D2P1: {}", cnt)
 }
 
@@ -35,6 +35,6 @@ fn test_parsed_line2(parsed: Vec<String>) -> bool {
 }
 
 pub fn puzzle2() -> String {
-    let cnt = read_lines("./src/inputs/day2").unwrap().map(|l| {parse_line(l.unwrap().as_str())}).filter(|p| test_parsed_line2(p.to_vec())).count();
+    let cnt = read_lines("./inputs/day2").unwrap().map(|l| {parse_line(l.unwrap().as_str())}).filter(|p| test_parsed_line2(p.to_vec())).count();
     format!("D2P2: {}", cnt)
 }
