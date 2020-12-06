@@ -6,6 +6,7 @@ mod day1;
 mod day2;
 mod day3;
 mod day4;
+mod day5;
 
 fn main() {
     println!("{}", day1::puzzle1());
@@ -19,4 +20,7 @@ fn main() {
     println!("");
     println!("{}", day4::puzzle1());
     println!("{}", day4::puzzle2());
+    println!("");
+    println!("{}", day5::puzzle1());
+    println!("{}", day5::puzzle2());
 }
