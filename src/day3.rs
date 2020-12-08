@@ -20,17 +20,16 @@ fn count_trees(matrix: &Vec<Vec<bool>>, i_shift: usize, j_shift: usize) -> usize
     cnt
 }
 
-pub fn puzzle1() -> String {
+pub fn puzzle1() -> usize {
     let mat = parse_input();
-    format!("D3P1: {}", count_trees(&mat, 1, 3))
+    count_trees(&mat, 1, 3)
 }
 
-pub fn puzzle2() -> String {
+pub fn puzzle2() -> usize {
     let mat = parse_input();
-    let cnt11 = count_trees(&mat, 1, 1);
-    let cnt13 = count_trees(&mat, 1, 3);
-    let cnt15 = count_trees(&mat, 1, 5);
-    let cnt17 = count_trees(&mat, 1, 7);
-    let cnt21 = count_trees(&mat, 2, 1);
-    format!("D3P2: {}", cnt11 * cnt13 * cnt15 * cnt17 * cnt21)
+    count_trees(&mat, 1, 1)
+        * count_trees(&mat, 1, 3)
+        * count_trees(&mat, 1, 5)
+        * count_trees(&mat, 1, 7)
+        * count_trees(&mat, 2, 1)
 }

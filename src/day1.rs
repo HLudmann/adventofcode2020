@@ -1,25 +1,25 @@
 use crate::common::read_lines;
 
-fn parse_input() -> Vec<u64> {
+fn parse_input() -> Vec<usize> {
     read_lines("./inputs/day1")
         .iter()
-        .map(|l| l.parse::<u64>().unwrap())
+        .map(|l| l.parse::<usize>().unwrap())
         .collect()
 }
 
-pub fn puzzle1() -> String {
+pub fn puzzle1() -> usize {
     let inputs = parse_input();
     for (i, x) in inputs.iter().enumerate() {
         for y in inputs[i..].iter() {
             if x + y == 2020 {
-                return format!("D1P1: {}", x * y);
+                return x * y;
             }
         }
     }
-    return String::new();
+    return 0;
 }
 
-pub fn puzzle2() -> String {
+pub fn puzzle2() -> usize {
     let inputs = parse_input();
     for (i, x) in inputs.iter().enumerate() {
         for (j, y) in inputs[i..].iter().enumerate() {
@@ -28,10 +28,10 @@ pub fn puzzle2() -> String {
             }
             for z in inputs[j..].iter() {
                 if x + y + z == 2020 {
-                    return format!("D1P2: {}", x * y * z);
+                    return x * y * z;
                 }
             }
         }
     }
-    return String::new();
+    return 0;
 }

@@ -46,22 +46,10 @@ fn count_all_true(group: &Vec<Vec<bool>>) -> usize {
     cnt
 }
 
-pub fn puzzle1() -> String {
-    format!(
-        "D6P1: {:?}",
-        parse_input()
-            .iter()
-            .map(|g| count_one_true(g))
-            .sum::<usize>()
-    )
+pub fn puzzle1() -> usize {
+    parse_input().iter().map(|g| count_one_true(g)).sum()
 }
 
-pub fn puzzle2() -> String {
-    format!(
-        "D6P2: {:?}",
-        parse_input()
-            .iter()
-            .map(|g| count_all_true(g))
-            .sum::<usize>()
-    )
+pub fn puzzle2() -> usize {
+    parse_input().iter().map(|g| count_all_true(g)).sum()
 }

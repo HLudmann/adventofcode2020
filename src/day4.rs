@@ -114,19 +114,17 @@ fn passport_extended_test(passport: &HashMap<String, String>) -> bool {
     true
 }
 
-pub fn puzzle1() -> String {
-    let cnt = parse_input()
+pub fn puzzle1() -> usize {
+    parse_input()
         .iter()
         .filter(|p| passport_simple_test(*p))
-        .count();
-    format!("D4P1: {}", cnt)
+        .count()
 }
 
-pub fn puzzle2() -> String {
-    let cnt = parse_input()
+pub fn puzzle2() -> usize {
+    parse_input()
         .iter()
         .filter(|p| passport_simple_test(*p))
         .filter(|p| passport_extended_test(p))
-        .count();
-    format!("D4P2: {}", cnt)
+        .count()
 }

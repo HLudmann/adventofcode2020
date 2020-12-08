@@ -26,11 +26,11 @@ fn parse_input() -> Vec<usize> {
         .collect()
 }
 
-pub fn puzzle1() -> String {
-    format!("D5P1: {}", parse_input().iter().max().unwrap())
+pub fn puzzle1() -> usize {
+    *parse_input().iter().max().unwrap()
 }
 
-pub fn puzzle2() -> String {
+pub fn puzzle2() -> usize {
     let mut seats = (0..=127 * 8 + 7)
         .map(|i| (i, true))
         .collect::<Vec<(usize, bool)>>();
@@ -44,8 +44,8 @@ pub fn puzzle2() -> String {
         .collect::<Vec<usize>>();
     for i in 1..possibilities.len() {
         if possibilities[i - 1] != possibilities[i] - 1 {
-            return format!("D5P2: {}", possibilities[i]);
+            return possibilities[i];
         }
     }
-    panic!()
+    return 0;
 }

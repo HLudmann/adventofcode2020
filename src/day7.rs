@@ -74,7 +74,7 @@ fn count_bags_in_bag<'a>(
         .sum::<usize>()
 }
 
-pub fn puzzle1() -> String {
+pub fn puzzle1() -> usize {
     let rules = parse_input();
     let mut can_contain: HashSet<&String> = HashSet::new();
 
@@ -88,14 +88,9 @@ pub fn puzzle1() -> String {
         }
     }
 
-    format!("D7P1: {:?}", can_contain.len())
+    can_contain.len()
 }
 
-pub fn puzzle2() -> String {
-    let rules = parse_input();
-
-    format!(
-        "D7P2: {}",
-        count_bags_in_bag(&rules, &"shiny gold".to_string())
-    )
+pub fn puzzle2() -> usize {
+    count_bags_in_bag(&parse_input(), &"shiny gold".to_string())
 }

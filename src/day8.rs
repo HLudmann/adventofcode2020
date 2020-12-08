@@ -66,14 +66,11 @@ fn flip_occ_n(instructions: &Vec<(usize, isize)>, n: usize) -> Vec<(usize, isize
     flipped
 }
 
-pub fn puzzle1() -> String {
-    let instructions = parse_input();
-    let (_, acc) = follow_until_loop_or_end(instructions);
-
-    format!("D8P1: {}", acc)
+pub fn puzzle1() -> usize {
+    follow_until_loop_or_end(parse_input()).1
 }
 
-pub fn puzzle2() -> String {
+pub fn puzzle2() -> usize {
     let instructions = parse_input();
     let n_max = instructions.iter().filter(|t| t.0 != 1).count();
 
@@ -81,8 +78,8 @@ pub fn puzzle2() -> String {
         let mod_inst = flip_occ_n(&instructions, n);
         let (looped, acc) = follow_until_loop_or_end(mod_inst);
         if !looped {
-            return format!("D8P2: {}", acc);
+            return acc;
         }
     }
-    format!("D8P2: not found")
+    return 0;
 }

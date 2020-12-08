@@ -28,20 +28,18 @@ fn check_pwd_method2(parsed: &(usize, usize, char, String)) -> bool {
     (char_vec[parsed.0 - 1] == parsed.2) ^ (char_vec[parsed.1 - 1] == parsed.2)
 }
 
-pub fn puzzle1() -> String {
-    let cnt = read_lines("./inputs/day2")
+pub fn puzzle1() -> usize {
+    read_lines("./inputs/day2")
         .iter()
         .map(|l| parse_input_by_line(l))
         .filter(|p| check_pwd_method1(p))
-        .count();
-    format!("D2P1: {}", cnt)
+        .count()
 }
 
-pub fn puzzle2() -> String {
-    let cnt = read_lines("./inputs/day2")
+pub fn puzzle2() -> usize {
+    read_lines("./inputs/day2")
         .iter()
         .map(|l| parse_input_by_line(l))
         .filter(|p| check_pwd_method2(p))
-        .count();
-    format!("D2P2: {}", cnt)
+        .count()
 }
