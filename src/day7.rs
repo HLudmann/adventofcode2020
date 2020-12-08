@@ -4,9 +4,10 @@ use std::collections::{HashMap, HashSet};
 
 use crate::common::read_lines;
 
-fn line_to_rule(line: String) -> (String, HashMap<String, usize>) {
+fn line_to_rule(line: &String) -> (String, HashMap<String, usize>) {
     lazy_static! {
-        static ref RE: Regex = Regex::new(r"^([1-9]+) ([a-z]+ [a-z]+) bags?.?$").unwrap();
+        static ref RE: Regex =
+            Regex::new(r"^(?P<nbr>[1-9]+) (?P<color>[a-z]+ [a-z]+) bags?.?$").unwrap();
     }
     let mut bags_in_rule: HashMap<String, usize> = HashMap::new();
     let split = line.split(" bags contain ").collect::<Vec<&str>>();
@@ -15,17 +16,19 @@ fn line_to_rule(line: String) -> (String, HashMap<String, usize>) {
     }
     let bags = split[1].split(", ").collect::<Vec<&str>>();
     for bag in bags {
-        let capt = RE
-            .captures(bag)
-            .and_then(|cap| Some(cap))
-            .unwrap()
-            .iter()
-            .map(|m| m.unwrap().as_str().to_string())
-            .collect::<Vec<String>>();
-        let nbr = capt[1].parse::<usize>().unwrap();
-        bags_in_rule.insert(capt[2].to_string(), nbr);
+        let capt = RE.captures(bag).unwrap();
+        let nbr = capt["nbr"].parse::<usize>().unwrap();
+        let color = capt["color"].to_string();
+        bags_in_rule.insert(color, nbr);
     }
     (split[0].to_string(), bags_in_rule)
+}
+
+fn parse_input() -> HashMap<String, HashMap<String, usize>> {
+    read_lines("./inputs/day7")
+        .iter()
+        .map(|l| line_to_rule(l))
+        .collect()
 }
 
 fn can_contain_n_visited<'a>(
@@ -72,16 +75,9 @@ fn count_bags_in_bag<'a>(
 }
 
 pub fn puzzle1() -> String {
-    let mut rules: HashMap<String, HashMap<String, usize>> = HashMap::new();
-    for rule in read_lines("./inputs/day7")
-        .unwrap()
-        .map(|l| l.unwrap())
-        .map(|l| line_to_rule(l))
-    {
-        rules.insert(rule.0, rule.1);
-    }
-    // println!("rules keys: {:?}", rules.keys());
+    let rules = parse_input();
     let mut can_contain: HashSet<&String> = HashSet::new();
+
     for bag in rules.keys() {
         if can_contain.contains(bag) {
             continue;
@@ -96,14 +92,7 @@ pub fn puzzle1() -> String {
 }
 
 pub fn puzzle2() -> String {
-    let mut rules: HashMap<String, HashMap<String, usize>> = HashMap::new();
-    for rule in read_lines("./inputs/day7")
-        .unwrap()
-        .map(|l| l.unwrap())
-        .map(|l| line_to_rule(l))
-    {
-        rules.insert(rule.0, rule.1);
-    }
+    let rules = parse_input();
 
     format!(
         "D7P2: {}",

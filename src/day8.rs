@@ -1,9 +1,9 @@
 use crate::common::read_lines;
 
-fn input_to_instructions<'a>() -> Vec<(usize, isize)> {
-    let lines = read_lines("./inputs/day8").unwrap().map(|l| l.unwrap());
+fn parse_input() -> Vec<(usize, isize)> {
+    let lines = read_lines("./inputs/day8");
     let mut instructions: Vec<(usize, isize)> = Vec::new();
-    for line in lines {
+    for line in lines.iter() {
         let split = line.split_whitespace().collect::<Vec<&str>>();
         let arg = split[1].parse::<isize>().unwrap();
         let ope: usize = match split[0] {
@@ -52,28 +52,29 @@ fn flip_occ_n(instructions: &Vec<(usize, isize)>, n: usize) -> Vec<(usize, isize
             p += 1
         }
         if p == n {
-            instructions[0..i].iter().for_each(|t| flipped.push(*t));
             match instructions[i] {
                 (0, val) => flipped.push((2, val)),
                 (2, val) => flipped.push((0, val)),
                 _ => (),
             }
             instructions[i + 1..].iter().for_each(|t| flipped.push(*t));
+            return flipped;
         }
+        flipped.push(instructions[i]);
     }
 
     flipped
 }
 
 pub fn puzzle1() -> String {
-    let instructions = input_to_instructions();
+    let instructions = parse_input();
     let (_, acc) = follow_until_loop_or_end(instructions);
 
     format!("D8P1: {}", acc)
 }
 
 pub fn puzzle2() -> String {
-    let instructions = input_to_instructions();
+    let instructions = parse_input();
     let n_max = instructions.iter().filter(|t| t.0 != 1).count();
 
     for n in 1..=n_max {

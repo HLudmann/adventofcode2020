@@ -1,10 +1,10 @@
 use crate::common::read_lines;
 
-fn parse_groups() -> Vec<Vec<Vec<bool>>> {
-    let lines = read_lines("./inputs/day6").unwrap();
+fn parse_input() -> Vec<Vec<Vec<bool>>> {
+    let lines = read_lines("./inputs/day6");
     let mut groups: Vec<Vec<Vec<bool>>> = Vec::new();
     let mut group: Vec<Vec<bool>> = Vec::new();
-    for l in lines.map(|line| line.unwrap()) {
+    for l in lines.iter() {
         if l.len() == 0 {
             groups.push(group);
             group = Vec::new();
@@ -49,7 +49,7 @@ fn count_all_true(group: &Vec<Vec<bool>>) -> usize {
 pub fn puzzle1() -> String {
     format!(
         "D6P1: {:?}",
-        parse_groups()
+        parse_input()
             .iter()
             .map(|g| count_one_true(g))
             .sum::<usize>()
@@ -59,7 +59,7 @@ pub fn puzzle1() -> String {
 pub fn puzzle2() -> String {
     format!(
         "D6P2: {:?}",
-        parse_groups()
+        parse_input()
             .iter()
             .map(|g| count_all_true(g))
             .sum::<usize>()

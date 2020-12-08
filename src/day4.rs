@@ -12,11 +12,8 @@ const HCL: &str = "hcl";
 const ECL: &str = "ecl";
 const PID: &str = "pid";
 
-fn parse_lines_to_passports() -> Vec<HashMap<String, String>> {
-    let lines = read_lines("./inputs/day4")
-        .unwrap()
-        .map(|l| l.unwrap())
-        .collect::<Vec<String>>();
+fn parse_input() -> Vec<HashMap<String, String>> {
+    let lines = read_lines("./inputs/day4");
     let mut passports: Vec<HashMap<String, String>> = Vec::new();
     let mut passport = HashMap::new();
 
@@ -87,11 +84,11 @@ fn passport_extended_test(passport: &HashMap<String, String>) -> bool {
     if !HGT_REF.is_match(hgt_str) {
         return false;
     }
-    let hgt = match hgt_str[..=hgt_str.len() - 3].to_string().parse::<usize>() {
+    let hgt = match hgt_str[..hgt_str.len() - 2].to_string().parse::<usize>() {
         Ok(val) => val,
         _ => return false,
     };
-    match &hgt_str[hgt_str.len() - 2..=hgt_str.len() - 1] {
+    match &hgt_str[hgt_str.len() - 2..hgt_str.len()] {
         "cm" => {
             if hgt < 150 || hgt > 193 {
                 return false;
@@ -118,7 +115,7 @@ fn passport_extended_test(passport: &HashMap<String, String>) -> bool {
 }
 
 pub fn puzzle1() -> String {
-    let cnt = parse_lines_to_passports()
+    let cnt = parse_input()
         .iter()
         .filter(|p| passport_simple_test(*p))
         .count();
@@ -126,7 +123,7 @@ pub fn puzzle1() -> String {
 }
 
 pub fn puzzle2() -> String {
-    let cnt = parse_lines_to_passports()
+    let cnt = parse_input()
         .iter()
         .filter(|p| passport_simple_test(*p))
         .filter(|p| passport_extended_test(p))

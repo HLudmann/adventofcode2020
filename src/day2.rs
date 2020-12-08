@@ -3,51 +3,45 @@ use regex::Regex;
 
 use crate::common::read_lines;
 
-// pub fn parse_line(line: &str) -> (u64, u64, String, String) {
-fn parse_line(line: &str) -> Vec<String> {
+fn parse_input_by_line(line: &String) -> (usize, usize, char, String) {
     lazy_static! {
         static ref RE: Regex = Regex::new(r"^(\d+)-(\d+) (\w): (\w+)$").unwrap();
     }
-    RE.captures(line)
-        .and_then(|cap| Some(cap))
-        .unwrap()
-        .iter()
-        .map(|m| m.unwrap().as_str().to_string())
-        .collect()
+    let capt = RE.captures(&line).unwrap();
+
+    let u1: usize = capt[1].parse().unwrap();
+    let u2: usize = capt[2].parse().unwrap();
+    let req: char = capt[3].chars().nth(0).unwrap();
+    let pwd: String = capt[4].to_string();
+
+    (u1, u2, req, pwd)
 }
 
-fn test_parsed_line1(parsed: Vec<String>) -> bool {
-    let min = parsed[1].parse::<usize>().unwrap();
-    let max = parsed[2].parse::<usize>().unwrap();
-    let req = parsed[3].chars().nth(0).unwrap();
-    let cnt = parsed[4].chars().filter(|c| c == &req).count();
+fn check_pwd_method1(parsed: &(usize, usize, char, String)) -> bool {
+    let cnt = parsed.3.chars().filter(|c| c == &parsed.2).count();
 
-    min <= cnt && cnt <= max
+    parsed.0 <= cnt && cnt <= parsed.1
+}
+
+fn check_pwd_method2(parsed: &(usize, usize, char, String)) -> bool {
+    let char_vec: Vec<char> = parsed.3.chars().collect();
+    (char_vec[parsed.0 - 1] == parsed.2) ^ (char_vec[parsed.1 - 1] == parsed.2)
 }
 
 pub fn puzzle1() -> String {
     let cnt = read_lines("./inputs/day2")
-        .unwrap()
-        .map(|l| parse_line(l.unwrap().as_str()))
-        .filter(|p| test_parsed_line1(p.to_vec()))
+        .iter()
+        .map(|l| parse_input_by_line(l))
+        .filter(|p| check_pwd_method1(p))
         .count();
     format!("D2P1: {}", cnt)
 }
 
-fn test_parsed_line2(parsed: Vec<String>) -> bool {
-    let pos1 = parsed[1].parse::<usize>().unwrap();
-    let pos2 = parsed[2].parse::<usize>().unwrap();
-    let req = parsed[3].chars().nth(0).unwrap();
-    let char_vec: Vec<char> = parsed[4].chars().collect();
-
-    (char_vec[pos1 - 1] == req) ^ (char_vec[pos2 - 1] == req)
-}
-
 pub fn puzzle2() -> String {
     let cnt = read_lines("./inputs/day2")
-        .unwrap()
-        .map(|l| parse_line(l.unwrap().as_str()))
-        .filter(|p| test_parsed_line2(p.to_vec()))
+        .iter()
+        .map(|l| parse_input_by_line(l))
+        .filter(|p| check_pwd_method2(p))
         .count();
     format!("D2P2: {}", cnt)
 }
