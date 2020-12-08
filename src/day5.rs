@@ -20,21 +20,31 @@ fn line_to_id(line: String) -> usize {
 }
 
 pub fn puzzle1() -> String {
-    let max = read_lines("./inputs/day5").unwrap().map(|l| line_to_id(l.unwrap())).max().unwrap();
+    let max = read_lines("./inputs/day5")
+        .unwrap()
+        .map(|l| line_to_id(l.unwrap()))
+        .max()
+        .unwrap();
 
     format!("D5P1: {}", max)
 }
 
 pub fn puzzle2() -> String {
-    let mut seats = (0..=127*8+7).map(|i| (i, true)).collect::<Vec<(usize, bool)>>();
+    let mut seats = (0..=127 * 8 + 7)
+        .map(|i| (i, true))
+        .collect::<Vec<(usize, bool)>>();
     for l in read_lines("./inputs/day5").unwrap() {
         let i = line_to_id(l.unwrap());
         seats[i] = (i, false);
-    } 
-    let possibilities = seats.iter().filter(|s| s.1).map(|s| s.0).collect::<Vec<usize>>();
-    for i in 1..=possibilities.len()-1 {
-        if possibilities[i-1] != possibilities[i] - 1 {
-            return format!("D5P2: {}", possibilities[i])
+    }
+    let possibilities = seats
+        .iter()
+        .filter(|s| s.1)
+        .map(|s| s.0)
+        .collect::<Vec<usize>>();
+    for i in 1..=possibilities.len() - 1 {
+        if possibilities[i - 1] != possibilities[i] - 1 {
+            return format!("D5P2: {}", possibilities[i]);
         }
     }
     panic!()

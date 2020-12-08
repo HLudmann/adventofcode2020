@@ -17,7 +17,7 @@ fn parse_groups() -> Vec<Vec<Vec<bool>>> {
         group.push(member);
     }
     groups.push(group);
-    return groups
+    return groups;
 }
 
 fn count_one_true(group: &Vec<Vec<bool>>) -> usize {
@@ -47,9 +47,21 @@ fn count_all_true(group: &Vec<Vec<bool>>) -> usize {
 }
 
 pub fn puzzle1() -> String {
-    format!("D6P1: {:?}", parse_groups().iter().map(|g| count_one_true(g)).sum::<usize>())
+    format!(
+        "D6P1: {:?}",
+        parse_groups()
+            .iter()
+            .map(|g| count_one_true(g))
+            .sum::<usize>()
+    )
 }
 
 pub fn puzzle2() -> String {
-    format!("D6P2: {:?}", parse_groups().iter().map(|g| count_all_true(g)).sum::<usize>())
+    format!(
+        "D6P2: {:?}",
+        parse_groups()
+            .iter()
+            .map(|g| count_all_true(g))
+            .sum::<usize>()
+    )
 }

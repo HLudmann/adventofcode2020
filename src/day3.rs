@@ -5,15 +5,18 @@ fn parse_line(line: String) -> Vec<bool> {
 }
 
 fn inputs_to_matrix() -> Vec<Vec<bool>> {
-    read_lines("./inputs/day3").unwrap().map(|line| parse_line(line.unwrap())).collect()
+    read_lines("./inputs/day3")
+        .unwrap()
+        .map(|line| parse_line(line.unwrap()))
+        .collect()
 }
 
 fn count_trees(matrix: &Vec<Vec<bool>>, i_shift: usize, j_shift: usize) -> usize {
     let j_max = matrix[0].len();
     let mut cnt = 0;
     let mut j = 0;
-    for i in (i_shift..=matrix.len()-1).step_by(i_shift) {
-        j = (j + j_shift)%j_max;
+    for i in (i_shift..=matrix.len() - 1).step_by(i_shift) {
+        j = (j + j_shift) % j_max;
         if matrix[i][j] {
             cnt += 1;
         }
