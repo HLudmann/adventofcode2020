@@ -32,8 +32,7 @@ fn test_target(suite: Vec<usize>, target: usize) -> (bool, usize) {
     return (false, 0);
 }
 
-pub fn puzzle1() -> usize {
-    let numbers = parse_input();
+fn find_mismatch(numbers: &Vec<usize>) -> usize {
     for (i, nbr) in numbers[25..].iter().enumerate() {
         if !test_number_preamble(numbers[i..i + 25].to_vec(), *nbr) {
             return *nbr;
@@ -42,9 +41,14 @@ pub fn puzzle1() -> usize {
     return 0;
 }
 
+pub fn puzzle1() -> usize {
+    let numbers = parse_input();
+    find_mismatch(&numbers)
+}
+
 pub fn puzzle2() -> usize {
     let numbers = parse_input();
-    let target = puzzle1();
+    let target = find_mismatch(&numbers);
 
     for i in 0..numbers.len() {
         let (hit, len) = test_target(numbers[i..].to_vec(), target);

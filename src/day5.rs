@@ -1,28 +1,16 @@
 use crate::common::read_lines;
 
-fn line_to_id(line: &String) -> usize {
-    let chars = line.chars().collect::<Vec<char>>();
-    let mut r_min = 0;
-    let mut r_max = 127;
-    let mut c_min = 0;
-    let mut c_max = 7;
-
-    for c in chars {
-        match c {
-            'F' => r_max = (r_max + r_min - 1) / 2,
-            'B' => r_min = (r_max + r_min + 1) / 2,
-            'L' => c_max = (c_max + c_min - 1) / 2,
-            'R' => c_min = (c_max + c_min + 1) / 2,
-            _ => panic!(),
-        }
-    }
-    r_min * 8 + c_min
-}
-
 fn parse_input() -> Vec<usize> {
     read_lines("./inputs/day5")
         .iter()
-        .map(|l| line_to_id(l))
+        .map(|l| {
+            let bin = l
+                .replace("F", "0")
+                .replace("B", "1")
+                .replace("L", "0")
+                .replace("R", "1");
+            usize::from_str_radix(bin.as_str(), 2).unwrap()
+        })
         .collect()
 }
 

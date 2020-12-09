@@ -10,10 +10,9 @@ fn parse_input() -> Vec<usize> {
 pub fn puzzle1() -> usize {
     let inputs = parse_input();
     for (i, x) in inputs.iter().enumerate() {
-        for y in inputs[i..].iter() {
-            if x + y == 2020 {
-                return x * y;
-            }
+        let y = 2020 - x;
+        if y != *x && inputs[i..].contains(&y) {
+            return x * y;
         }
     }
     return 0;
@@ -26,10 +25,9 @@ pub fn puzzle2() -> usize {
             if x + y >= 2020 {
                 continue;
             }
-            for z in inputs[j..].iter() {
-                if x + y + z == 2020 {
-                    return x * y * z;
-                }
+            let z = 2020 - x - y;
+            if z != *x && z != *y && inputs[j..].contains(&z) {
+                return x * y * z;
             }
         }
     }
