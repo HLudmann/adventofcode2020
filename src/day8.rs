@@ -66,11 +66,11 @@ fn flip_occ_n(instructions: &Vec<(usize, isize)>, n: usize) -> Vec<(usize, isize
     flipped
 }
 
-pub fn puzzle1() -> usize {
+pub fn puzzle1() -> isize {
     follow_until_loop_or_end(parse_input()).1
 }
 
-pub fn puzzle2() -> usize {
+pub fn puzzle2() -> isize {
     let instructions = parse_input();
     let n_max = instructions.iter().filter(|t| t.0 != 1).count();
 
