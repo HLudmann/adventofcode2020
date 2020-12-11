@@ -1,7 +1,7 @@
 use crate::common::read_lines;
 
 fn parse_input() -> Vec<Vec<bool>> {
-    read_lines("./inputs/day3")
+    read_lines("./inputs/day03")
         .iter()
         .map(|l| l.chars().map(|c| c == '#').collect::<Vec<bool>>())
         .collect()

@@ -25,7 +25,7 @@ fn line_to_rule(line: &String) -> (String, HashMap<String, usize>) {
 }
 
 fn parse_input() -> HashMap<String, HashMap<String, usize>> {
-    read_lines("./inputs/day7")
+    read_lines("./inputs/day07")
         .iter()
         .map(|l| line_to_rule(l))
         .collect()

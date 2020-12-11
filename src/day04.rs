@@ -13,7 +13,7 @@ const ECL: &str = "ecl";
 const PID: &str = "pid";
 
 fn parse_input() -> Vec<HashMap<String, String>> {
-    let lines = read_lines("./inputs/day4");
+    let lines = read_lines("./inputs/day04");
     let mut passports: Vec<HashMap<String, String>> = Vec::new();
     let mut passport = HashMap::new();
 

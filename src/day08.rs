@@ -1,7 +1,7 @@
 use crate::common::read_lines;
 
 fn parse_input() -> Vec<(usize, isize)> {
-    let lines = read_lines("./inputs/day8");
+    let lines = read_lines("./inputs/day08");
     let mut instructions: Vec<(usize, isize)> = Vec::new();
     for line in lines.iter() {
         let split = line.split_whitespace().collect::<Vec<&str>>();

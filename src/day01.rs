@@ -1,7 +1,7 @@
 use crate::common::read_lines;
 
 fn parse_input() -> Vec<usize> {
-    read_lines("./inputs/day1")
+    read_lines("./inputs/day01")
         .iter()
         .map(|l| l.parse::<usize>().unwrap())
         .collect()

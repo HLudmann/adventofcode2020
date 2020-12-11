@@ -1,7 +1,7 @@
 use crate::common::read_lines;
 
 fn parse_input() -> Vec<Vec<Vec<bool>>> {
-    let lines = read_lines("./inputs/day6");
+    let lines = read_lines("./inputs/day06");
     let mut groups: Vec<Vec<Vec<bool>>> = Vec::new();
     let mut group: Vec<Vec<bool>> = Vec::new();
     for l in lines.iter() {

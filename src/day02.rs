@@ -29,7 +29,7 @@ fn check_pwd_method2(parsed: &(usize, usize, char, String)) -> bool {
 }
 
 pub fn puzzle1() -> usize {
-    read_lines("./inputs/day2")
+    read_lines("./inputs/day02")
         .iter()
         .map(|l| parse_input_by_line(l))
         .filter(|p| check_pwd_method1(p))
@@ -37,7 +37,7 @@ pub fn puzzle1() -> usize {
 }
 
 pub fn puzzle2() -> usize {
-    read_lines("./inputs/day2")
+    read_lines("./inputs/day02")
         .iter()
         .map(|l| parse_input_by_line(l))
         .filter(|p| check_pwd_method2(p))
