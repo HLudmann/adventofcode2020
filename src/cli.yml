@@ -1,0 +1,9 @@
+name: adventofcode2020
+version: "0.1.0"
+author: Ludmann H. <ludmann.h@gmail.com>
+about: Awnsers to Advent of Code puzzles
+args:
+  - DAY:
+      help: the day for wich you want the awnsers
+      required: false
+      index: 1
