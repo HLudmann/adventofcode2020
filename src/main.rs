@@ -21,6 +21,7 @@ mod day12;
 mod day13;
 mod day14;
 mod day15;
+mod day16;
 
 fn main() {
     let yaml = load_yaml!("cli.yml");
@@ -132,6 +133,10 @@ fn main() {
         "15" => {
             println!("P1: {}", day15::puzzle1());
             println!("P2: {}", day15::puzzle2());
+        }
+        "16" => {
+            println!("P1: {}", day16::puzzle1());
+            println!("P2: {}", day16::puzzle2());
         }
         d => println!("day not recognized: '{}'", d),
     }
